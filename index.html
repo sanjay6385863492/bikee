@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Animated Bike</title>
+    <style>
+      canvas {
+        background: #e0f7fa;
+        display: block;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="bikeCanvas" width="800" height="400"></canvas>
+
+    <script>
+      const canvas = document.getElementById("bikeCanvas");
+      const ctx = canvas.getContext("2d");
+
+      let x = 0;
+
+      function drawBike(x) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Wheels
+        ctx.beginPath();
+        ctx.arc(x + 50, 300, 30, 0, Math.PI * 2);
+        ctx.arc(x + 150, 300, 30, 0, Math.PI * 2);
+        ctx.fillStyle = "black";
+        ctx.fill();
+
+        // Frame
+        ctx.beginPath();
+        ctx.moveTo(x + 50, 300);
+        ctx.lineTo(x + 100, 250);
+        ctx.lineTo(x + 150, 300);
+        ctx.lineTo(x + 100, 300);
+        ctx.lineTo(x + 100, 250);
+        ctx.strokeStyle = "blue";
+        ctx.lineWidth = 4;
+        ctx.stroke();
+
+        // Handlebar
+        ctx.beginPath();
+        ctx.moveTo(x + 100, 250);
+        ctx.lineTo(x + 90, 230);
+        ctx.lineTo(x + 110, 230);
+        ctx.strokeStyle = "gray";
+        ctx.stroke();
+      }
+
+      function animate() {
+        drawBike(x);
+        x += 2;
+        if (x > canvas.width) x = -150;
+        requestAnimationFrame(animate);
+      }
+
+      animate();
+    </script>
+  </body>
+</html>
